@@ -7,67 +7,66 @@
 <title>Containment Console</title>
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+}
 
 body {
-  margin: 0;
   min-height: 100vh;
   padding: 22px;
-
   background:
-    radial-gradient(circle at center, #200505 0%, #090202 45%, #010101 100%);
-
-  color: #e7e7e7;
+    radial-gradient(circle at center, #260505 0%, #0b0202 45%, #010101 100%);
+  color: #eee;
   font-family: "Courier New", monospace;
-
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  transition: background 1.4s ease;
 }
 
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-
+  pointer-events: none;
   background:
     repeating-linear-gradient(
       to bottom,
-      rgba(255,255,255,.025) 0,
+      rgba(255,255,255,.025) 0px,
       rgba(255,255,255,.025) 1px,
       transparent 1px,
       transparent 5px
     );
-
-  pointer-events: none;
 }
+
+/* -------------------- */
+/* RED CONTAINMENT MODE */
+/* -------------------- */
 
 .panel {
   width: 100%;
   max-width: 680px;
-
-  background: rgba(4,0,0,.9);
-
-  border: 1px solid #741d1d;
-
+  background: rgba(5,0,0,.92);
+  border: 1px solid #8b2424;
   box-shadow:
-    0 0 40px rgba(200,0,0,.15),
-    inset 0 0 40px rgba(120,0,0,.06);
+    0 0 45px rgba(220,0,0,.18),
+    inset 0 0 45px rgba(140,0,0,.07);
 }
 
 .warning {
-  background: #8c1717;
-
-  padding: 10px;
-
+  background: #971919;
+  padding: 11px;
   text-align: center;
-
-  font-size: 11px;
   font-weight: bold;
-
+  font-size: 11px;
   letter-spacing: 4px;
-
-  animation: flash 1.4s infinite;
+  animation: flash 1.3s infinite;
 }
 
 .content {
@@ -75,198 +74,289 @@ body::before {
 }
 
 .status {
-  color: #b64c4c;
-
+  color: #c05252;
   font-size: 11px;
-
   letter-spacing: 3px;
 }
 
 h1 {
   margin: 12px 0 5px;
-
-  font-size: clamp(31px, 8vw, 54px);
-
+  font-size: clamp(32px, 8vw, 56px);
   line-height: .95;
-
   letter-spacing: 3px;
 }
 
 .meta {
-  color: #875555;
-
+  margin-top: 18px;
+  color: #9d6060;
   font-size: 11px;
-
-  line-height: 1.8;
-
+  line-height: 1.9;
   letter-spacing: 2px;
-
-  margin-top: 16px;
 }
 
 .line {
-  border-top: 1px solid #461515;
-
+  border-top: 1px solid #4d1717;
   margin: 25px 0;
 }
 
 .label {
-  color: #b65858;
-
+  color: #c55d5d;
   font-size: 10px;
-
   letter-spacing: 2px;
-
   margin-bottom: 10px;
 }
 
 input {
   width: 100%;
-
   background: #050101;
-
-  border: 1px solid #762323;
-
-  color: #eee;
-
+  border: 1px solid #862828;
+  color: #fff;
   padding: 16px;
-
   font-family: "Courier New", monospace;
-
   font-size: 18px;
-
   letter-spacing: 2px;
-
   text-transform: uppercase;
-
   outline: none;
 }
 
 input:focus {
-  border-color: #c34040;
-
-  box-shadow: 0 0 15px rgba(200,40,40,.18);
+  border-color: #d24949;
+  box-shadow: 0 0 18px rgba(215,55,55,.2);
 }
 
 button {
   width: 100%;
-
   margin-top: 14px;
-
   padding: 15px;
-
-  background: #7d1717;
-
-  border: 1px solid #b33737;
-
-  color: white;
-
+  background: #861919;
+  border: 1px solid #c03a3a;
+  color: #fff;
   font-family: "Courier New", monospace;
-
   font-weight: bold;
-
   letter-spacing: 3px;
-
   cursor: pointer;
 }
 
 button:hover {
-  background: #a32020;
+  background: #aa2323;
 }
 
 #response {
-  margin-top: 20px;
-
-  min-height: 22px;
-
-  color: #bd4c4c;
-
+  min-height: 24px;
+  margin-top: 18px;
+  color: #d25454;
   font-size: 12px;
-
-  letter-spacing: 2px;
-
   line-height: 1.8;
+  letter-spacing: 2px;
 }
 
 .footer {
-  margin-top: 26px;
-
+  margin-top: 25px;
   text-align: right;
-
-  color: #562727;
-
+  color: #623131;
   font-size: 9px;
-
   letter-spacing: 2px;
 }
 
+/* ---------------- */
+/* CONTAINMENT MODE */
+/* ---------------- */
 
-/* SUCCESS SCREEN */
-
-#success {
+#sequence {
   display: none;
-
   width: 100%;
   max-width: 680px;
-
   text-align: center;
-
-  padding: 45px 25px;
 }
 
-.success-title {
-  color: #87b8a8;
+.sequence-box {
+  border: 1px solid #7f2020;
+  background: rgba(7,0,0,.9);
+  padding: 36px 24px;
+  box-shadow: 0 0 45px rgba(220,0,0,.15);
+}
 
-  font-size: clamp(28px, 8vw, 52px);
-
+.sequence-title {
+  color: #e5dede;
+  font-size: clamp(26px, 7vw, 48px);
   font-weight: bold;
-
   letter-spacing: 4px;
 }
 
-.success-line {
-  margin: 18px 0;
-
-  color: #698d82;
-
-  font-size: 12px;
-
+.sequence-sub {
+  margin-top: 15px;
+  color: #aa6666;
+  font-size: 11px;
   letter-spacing: 3px;
 }
 
-.anniversary {
+.progress-shell {
+  width: 100%;
+  height: 18px;
+  margin-top: 32px;
+  border: 1px solid #682121;
+  background: #080202;
+  overflow: hidden;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: #9e2525;
+  transition: width .6s ease;
+}
+
+.progress-text {
+  margin-top: 10px;
+  color: #a95b5b;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+/* -------- */
+/* BLACKOUT */
+/* -------- */
+
+#blackout {
   display: none;
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 50;
+}
 
-  margin-top: 55px;
+/* ---------------- */
+/* RESTORED / GREEN */
+/* ---------------- */
 
+#restored {
+  display: none;
+  width: 100%;
+  max-width: 700px;
+  text-align: center;
+}
+
+.restored-panel {
+  padding: 42px 24px;
+  border: 1px solid rgba(119,180,161,.38);
+  background: rgba(0,8,7,.74);
+  box-shadow:
+    0 0 40px rgba(90,180,150,.12),
+    inset 0 0 35px rgba(90,180,150,.05);
+}
+
+.restored-status {
+  color: #7fae9e;
+  font-size: 11px;
+  letter-spacing: 3px;
+}
+
+.restored-title {
+  margin-top: 14px;
+  color: #e2eee9;
+  font-size: clamp(32px, 9vw, 58px);
+  font-weight: bold;
+  line-height: 1;
+  letter-spacing: 4px;
+}
+
+.restored-line {
+  margin-top: 15px;
+  color: #708c83;
+  font-size: 11px;
+  letter-spacing: 3px;
+}
+
+.mission {
+  margin-top: 40px;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+.mission.show {
+  opacity: 1;
+}
+
+.mission-title {
+  color: #8fbfaf;
+  font-size: clamp(25px, 7vw, 42px);
+  font-weight: bold;
+  letter-spacing: 4px;
+}
+
+.anniversary {
+  margin-top: 28px;
   font-family: Georgia, serif;
-
-  color: #f0e9e4;
-
-  font-size: clamp(26px, 7vw, 42px);
-
-  line-height: 1.5;
-
-  animation: fade 2s forwards;
+  color: #f1ebe7;
+  font-size: clamp(27px, 7vw, 42px);
+  line-height: 1.4;
 }
 
 .heart {
-  color: #a95a5a;
+  display: block;
+  margin-top: 8px;
+  color: #b86565;
 }
+
+.cache {
+  margin-top: 38px;
+  padding: 18px;
+  border: 1px dashed #54776c;
+  background: rgba(55,100,85,.07);
+  opacity: 0;
+  transition: opacity 1.6s ease;
+}
+
+.cache.show {
+  opacity: 1;
+}
+
+.cache-label {
+  color: #82ad9f;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+.cache-sub {
+  margin-top: 10px;
+  color: #627a72;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+/* ---------- */
+/* ANIMATIONS */
+/* ---------- */
 
 @keyframes flash {
-  0%, 45%, 100% { opacity: 1; }
-  50%, 70% { opacity: .5; }
+  0%, 42%, 100% { opacity: 1; }
+  50%, 68% { opacity: .45; }
 }
 
-@keyframes fade {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes shake {
+  0% { transform: translate(0); }
+  20% { transform: translate(-4px, 2px); }
+  40% { transform: translate(4px, -2px); }
+  60% { transform: translate(-2px, -1px); }
+  80% { transform: translate(3px, 1px); }
+  100% { transform: translate(0); }
+}
+
+.shake {
+  animation: shake .35s linear 3;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .warning {
+  .warning,
+  .shake {
     animation: none;
+  }
+
+  .progress-bar,
+  .mission,
+  .cache {
+    transition: none;
   }
 }
 </style>
@@ -274,6 +364,7 @@ button:hover {
 
 <body>
 
+<!-- RED CONSOLE -->
 
 <div class="panel" id="console">
 
@@ -312,7 +403,7 @@ button:hover {
       spellcheck="false"
     >
 
-    <button onclick="containThreat()">
+    <button id="containButton">
       AUTHORIZE CONTAINMENT
     </button>
 
@@ -326,122 +417,221 @@ button:hover {
 
 </div>
 
+<!-- RED PROGRESS SEQUENCE -->
 
-<div id="success">
+<div id="sequence">
 
-  <div class="success-title" id="successTitle">
-    VALIDATING TOKEN...
-  </div>
+  <div class="sequence-box" id="sequenceBox">
 
-  <div class="success-line" id="successLine">
-    PLEASE WAIT
-  </div>
+    <div class="sequence-title" id="sequenceTitle">
+      VALIDATING TOKEN
+    </div>
 
-  <div class="anniversary" id="anniversary">
-    Happy anniversary.<br>
-    <span class="heart">♥</span>
+    <div class="sequence-sub" id="sequenceSub">
+      AUTHORIZATION REQUEST RECEIVED
+    </div>
+
+    <div class="progress-shell">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="progress-text" id="progressText">
+      0%
+    </div>
+
   </div>
 
 </div>
 
+<!-- BLACKOUT -->
+
+<div id="blackout"></div>
+
+<!-- GREEN RESTORED SCREEN -->
+
+<div id="restored">
+
+  <div class="restored-panel">
+
+    <div class="restored-status">
+      SURVIVAL SYSTEM // ONLINE
+    </div>
+
+    <div class="restored-title">
+      SYSTEM<br>RESTORED
+    </div>
+
+    <div class="restored-line">
+      INCIDENT SOTF-004 // CLOSED
+    </div>
+
+    <div class="mission" id="mission">
+
+      <div class="mission-title">
+        MISSION COMPLETE
+      </div>
+
+      <div class="anniversary">
+        Happy Anniversary.
+        <span class="heart">♥</span>
+      </div>
+
+    </div>
+
+    <div class="cache" id="cache">
+
+      <div class="cache-label">
+        FINAL CACHE DETECTED
+      </div>
+
+      <div class="cache-sub">
+        LOCATION DATA AVAILABLE
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
 
 <script>
 
 const correctToken = "IR04-7F3A9C";
 
+const tokenInput = document.getElementById("token");
+const response = document.getElementById("response");
+const containButton = document.getElementById("containButton");
+
+containButton.addEventListener("click", containThreat);
+
+tokenInput.addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    containThreat();
+  }
+});
+
 function containThreat() {
 
-  const input =
-    document.getElementById("token")
-    .value
-    .trim()
-    .toUpperCase();
-
-  const response =
-    document.getElementById("response");
+  const input = tokenInput.value.trim().toUpperCase();
 
   if (input !== correctToken) {
 
     response.innerHTML =
       "ACCESS DENIED<br>INVALID INCIDENT TOKEN";
 
+    document.getElementById("console").classList.add("shake");
+
+    setTimeout(() => {
+      document.getElementById("console").classList.remove("shake");
+    }, 1200);
+
     return;
   }
 
+  response.innerHTML = "";
+
   document.getElementById("console").style.display = "none";
+  document.getElementById("sequence").style.display = "block";
 
-  const success =
-    document.getElementById("success");
-
-  success.style.display = "block";
-
-
-  setTimeout(() => {
-
-    document.getElementById("successTitle").innerText =
-      "TOKEN ACCEPTED";
-
-    document.getElementById("successLine").innerText =
-      "AUTHORIZATION VERIFIED";
-
-  }, 1200);
-
-
-  setTimeout(() => {
-
-    document.getElementById("successTitle").innerText =
-      "INITIATING CONTAINMENT";
-
-    document.getElementById("successLine").innerText =
-      "ISOLATING ACTIVE THREAT...";
-
-  }, 2700);
-
-
-  setTimeout(() => {
-
-    document.getElementById("successTitle").innerText =
-      "THREAT NEUTRALIZED";
-
-    document.getElementById("successLine").innerText =
-      "SYSTEM INTEGRITY RESTORED";
-
-  }, 4500);
-
-
-  setTimeout(() => {
-
-    document.getElementById("successTitle").innerText =
-      "SYSTEM RESTORED";
-
-    document.getElementById("successLine").innerText =
-      "INCIDENT SOTF-004 // CLOSED";
-
-  }, 6200);
-
-
-  setTimeout(() => {
-
-    document.getElementById("anniversary").style.display =
-      "block";
-
-  }, 8000);
-
+  runContainmentSequence();
 }
 
+function setProgress(percent, title, subtitle) {
 
-document
-  .getElementById("token")
-  .addEventListener("keydown", function(event) {
+  document.getElementById("progressBar").style.width = percent + "%";
+  document.getElementById("progressText").innerText = percent + "%";
 
-    if (event.key === "Enter") {
-      containThreat();
-    }
+  document.getElementById("sequenceTitle").innerText = title;
+  document.getElementById("sequenceSub").innerText = subtitle;
+}
 
-  });
+function runContainmentSequence() {
+
+  setProgress(
+    8,
+    "TOKEN ACCEPTED",
+    "AUTHORIZATION VERIFIED"
+  );
+
+  setTimeout(() => {
+    setProgress(
+      24,
+      "ISOLATING THREAT",
+      "SEVERING ACTIVE CONNECTIONS"
+    );
+  }, 1000);
+
+  setTimeout(() => {
+    setProgress(
+      47,
+      "CONTAINMENT ACTIVE",
+      "QUARANTINING COMPROMISED SYSTEMS"
+    );
+  }, 2100);
+
+  setTimeout(() => {
+    setProgress(
+      71,
+      "PURGING THREAT",
+      "REMOVING MALICIOUS ARTIFACTS"
+    );
+  }, 3300);
+
+  setTimeout(() => {
+    setProgress(
+      93,
+      "RESTORING SYSTEM",
+      "VERIFYING SYSTEM INTEGRITY"
+    );
+  }, 4500);
+
+  setTimeout(() => {
+    setProgress(
+      100,
+      "THREAT NEUTRALIZED",
+      "CONTAINMENT SUCCESSFUL"
+    );
+
+    document.getElementById("sequenceBox").classList.add("shake");
+  }, 5700);
+
+  setTimeout(() => {
+
+    document.getElementById("blackout").style.display = "block";
+
+  }, 6900);
+
+  setTimeout(() => {
+
+    document.getElementById("sequence").style.display = "none";
+
+    document.body.style.background =
+      "radial-gradient(circle at 50% 35%, #17312b 0%, #081412 40%, #010303 80%)";
+
+    document.getElementById("restored").style.display = "block";
+
+  }, 7900);
+
+  setTimeout(() => {
+
+    document.getElementById("blackout").style.display = "none";
+
+  }, 8500);
+
+  setTimeout(() => {
+
+    document.getElementById("mission").classList.add("show");
+
+  }, 9800);
+
+  setTimeout(() => {
+
+    document.getElementById("cache").classList.add("show");
+
+  }, 12000);
+}
 
 </script>
-
 
 </body>
 </html>
