@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>...</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      #18312d 0%,
+      #0a1514 32%,
+      #020404 75%
+    );
+
+  color: #e7ece8;
+  font-family: "Courier New", monospace;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* distant forest */
+
+.forest {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 55%;
+  opacity: .7;
+}
+
+.tree {
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+
+  border-left: 55px solid transparent;
+  border-right: 55px solid transparent;
+  border-bottom: 280px solid #010202;
+}
+
+.tree::after {
+  content: "";
+  position: absolute;
+
+  left: -42px;
+  top: 80px;
+
+  width: 0;
+  height: 0;
+
+  border-left: 42px solid transparent;
+  border-right: 42px solid transparent;
+  border-bottom: 210px solid #010202;
+}
+
+.t1 {
+  left: -20px;
+  transform: scale(.9);
+}
+
+.t2 {
+  left: 17%;
+  transform: scale(1.25);
+}
+
+.t3 {
+  left: 43%;
+  transform: scale(.75);
+}
+
+.t4 {
+  right: 12%;
+  transform: scale(1.15);
+}
+
+.t5 {
+  right: -30px;
+  transform: scale(.85);
+}
+
+
+/* screen scanlines */
+
+.scanlines {
+  position: fixed;
+  inset: 0;
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,.025) 0px,
+      rgba(255,255,255,.025) 1px,
+      transparent 1px,
+      transparent 5px
+    );
+
+  pointer-events: none;
+}
+
+
+/* main message */
+
+.panel {
+
+  position: relative;
+  z-index: 5;
+
+  width: 88%;
+  max-width: 520px;
+
+  padding: 30px 22px;
+
+  background: rgba(0,0,0,.48);
+
+  border: 1px solid rgba(145,220,196,.35);
+
+  box-shadow:
+    0 0 35px rgba(92,201,170,.09),
+    inset 0 0 30px rgba(92,201,170,.04);
+
+  text-align: center;
+}
+
+.status {
+
+  color: #7da99b;
+
+  font-size: 11px;
+  letter-spacing: 3px;
+
+  margin-bottom: 30px;
+}
+
+.message {
+
+  font-size: clamp(35px, 10vw, 64px);
+
+  font-weight: bold;
+
+  letter-spacing: 5px;
+
+  text-shadow:
+    0 0 10px rgba(162,230,209,.20);
+}
+
+.arrow {
+
+  display: block;
+
+  font-size: 27px;
+
+  color: #59766d;
+
+  margin: 8px 0;
+}
+
+.footer {
+
+  margin-top: 30px;
+
+  color: #51645f;
+
+  font-size: 9px;
+
+  letter-spacing: 2px;
+}
+
+
+/* tiny blinking system indicator */
+
+.dot {
+
+  display: inline-block;
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #8bbcac;
+
+  margin-right: 7px;
+
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+
+  0%, 50% {
+    opacity: 1;
+  }
+
+  51%, 100% {
+    opacity: .15;
+  }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<div class="forest">
+
+  <div class="tree t1"></div>
+  <div class="tree t2"></div>
+  <div class="tree t3"></div>
+  <div class="tree t4"></div>
+  <div class="tree t5"></div>
+
+</div>
+
+
+<div class="panel">
+
+  <div class="status">
+    <span class="dot"></span>
+    INVENTORY COMMAND RECEIVED
+  </div>
+
+
+  <div class="message">
+
+    GET
+
+    <span class="arrow">↓</span>
+
+    NOODLES
+
+    <span class="arrow">↓</span>
+
+    AND
+
+    <span class="arrow">↓</span>
+
+    OPEN
+
+  </div>
+
+
+  <div class="footer">
+
+    SURVIVAL SYSTEM // ACTIVE
+
+  </div>
+
+</div>
+
+
+<div class="scanlines"></div>
+
+
+</body>
+</html>
