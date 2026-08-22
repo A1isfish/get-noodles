@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Security Alert</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 50% 30%, #241314 0%, #0b0808 38%, #020202 78%);
+      color: #e7e7e7;
+      font-family: "Courier New", monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.025) 0px,
+          rgba(255,255,255,0.025) 1px,
+          transparent 1px,
+          transparent 5px
+        );
+      pointer-events: none;
+    }
+
+    .panel {
+      width: 90%;
+      max-width: 620px;
+      padding: 28px 24px;
+      background: rgba(0,0,0,.58);
+      border: 1px solid rgba(180,70,70,.45);
+      box-shadow:
+        0 0 36px rgba(160,45,45,.10),
+        inset 0 0 24px rgba(160,45,45,.04);
+    }
+
+    .alert {
+      color: #b95f5f;
+      letter-spacing: 3px;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(30px, 8vw, 54px);
+      letter-spacing: 4px;
+    }
+
+    .sub {
+      color: #8d8d8d;
+      font-size: 12px;
+      letter-spacing: 2px;
+      margin-bottom: 26px;
+    }
+
+    .line {
+      border-top: 1px solid #2a2a2a;
+      margin: 22px 0;
+    }
+
+    .label {
+      color: #777;
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .payload {
+      background: #050505;
+      border: 1px solid #242424;
+      padding: 16px;
+      word-break: break-all;
+      color: #c8d2cf;
+      font-size: 14px;
+      line-height: 1.6;
+      user-select: all;
+    }
+
+    .footer {
+      margin-top: 22px;
+      color: #555;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-align: right;
+    }
+
+    .blink {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      margin-right: 8px;
+      border-radius: 50%;
+      background: #b95f5f;
+      animation: blink 1.2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 55% { opacity: 1; }
+      56%, 100% { opacity: .15; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="panel">
+
+    <div class="alert">
+      <span class="blink"></span>
+      SECURITY ALERT
+    </div>
+
+    <h1>UNAUTHORIZED ACCESS DETECTED</h1>
+
+    <div class="sub">
+      INCIDENT ID: SOTF-001
+    </div>
+
+    <div class="line"></div>
+
+    <div class="label">RECOVERED PAYLOAD // ANALYSIS REQUIRED</div>
+
+    <div class="payload">
+      SSBidXJuIHdpdGhvdXQgd29vZC4gSSBnaXZlIGxpZ2h0IHdpdGhvdXQgdGhlIHN1bi4gRmluZCBtZS4=
+    </div>
+
+    <div class="footer">
+      ANALYST ACTION REQUIRED
+    </div>
+
+  </div>
+
+</body>
+</html>
