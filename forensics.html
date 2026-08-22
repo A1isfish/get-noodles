@@ -1,173 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Forensic Analysis</title>
+<title>CRITICAL ALERT</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at 50% 30%, #101919 0%, #070b0b 42%, #020303 78%);
-      color: #e2e8e5;
-      font-family: "Courier New", monospace;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 22px;
+  background:
+    radial-gradient(circle at center, #260505 0%, #0d0202 45%, #020000 100%);
+  color: #eee;
+  font-family: "Courier New", monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background:
-        repeating-linear-gradient(
-          to bottom,
-          rgba(255,255,255,0.025) 0px,
-          rgba(255,255,255,0.025) 1px,
-          transparent 1px,
-          transparent 5px
-        );
-      pointer-events: none;
-    }
+/* RED EMERGENCY GLOW */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 100px rgba(255,0,0,.20);
+  animation: alarm 2s infinite;
+}
 
-    .panel {
-      width: 100%;
-      max-width: 720px;
-      padding: 28px 24px;
-      background: rgba(0,0,0,.58);
-      border: 1px solid rgba(100,150,140,.35);
-      box-shadow:
-        0 0 34px rgba(80,140,125,.08),
-        inset 0 0 26px rgba(80,140,125,.04);
-    }
+/* SCAN LINES */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,.025) 0,
+    rgba(255,255,255,.025) 1px,
+    transparent 1px,
+    transparent 5px
+  );
+}
 
-    .status {
-      color: #76a99a;
-      font-size: 12px;
-      letter-spacing: 3px;
-      margin-bottom: 12px;
-    }
+.panel {
+  width: 100%;
+  max-width: 720px;
+  background: rgba(5,0,0,.88);
+  border: 2px solid #8f2020;
+  box-shadow:
+    0 0 25px rgba(255,0,0,.20),
+    inset 0 0 35px rgba(255,0,0,.07);
+}
 
-    h1 {
-      margin: 0;
-      font-size: clamp(28px, 7vw, 50px);
-      letter-spacing: 4px;
-    }
+/* TOP WARNING STRIP */
+.warning {
+  background: #8e1818;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  font-size: 12px;
+  animation: flash 1.4s infinite;
+}
 
-    .sub {
-      margin-top: 8px;
-      color: #777;
-      font-size: 11px;
-      letter-spacing: 2px;
-    }
+.content {
+  padding: 26px 22px;
+}
 
-    .line {
-      border-top: 1px solid #242424;
-      margin: 24px 0;
-    }
+.status {
+  color: #e65353;
+  font-size: 12px;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+}
 
-    .label {
-      color: #707a77;
-      font-size: 10px;
-      letter-spacing: 2px;
-      margin-bottom: 10px;
-    }
+h1 {
+  color: #f1eeee;
+  margin: 0;
+  font-size: clamp(30px, 8vw, 52px);
+  line-height: .95;
+  letter-spacing: 3px;
+}
 
-    .data {
-      background: #040606;
-      border: 1px solid #222a28;
-      padding: 16px;
-      color: #cad5d1;
-      line-height: 1.65;
-      word-break: break-all;
-      font-size: 13px;
-      margin-bottom: 22px;
-      user-select: all;
-    }
+.sub {
+  margin-top: 13px;
+  color: #9c5c5c;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
 
-    .cipher-box {
-      border: 1px solid #27302e;
-      padding: 18px;
-      background: rgba(5,8,8,.7);
-    }
+.divider {
+  border-top: 1px solid #501919;
+  margin: 24px 0;
+}
 
-    .row {
-      margin: 7px 0;
-      color: #89938f;
-      font-size: 12px;
-    }
+.label {
+  color: #d85151;
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin: 18px 0 9px;
+}
 
-    .value {
-      color: #d5ddd9;
-    }
+.data {
+  background: #070101;
+  border-left: 3px solid #a52a2a;
+  border-top: 1px solid #351010;
+  border-right: 1px solid #351010;
+  border-bottom: 1px solid #351010;
+  padding: 16px;
+  color: #e0caca;
+  line-height: 1.65;
+  word-break: break-all;
+  font-size: 13px;
+  user-select: all;
+}
 
-    .redacted {
-      color: #8d5d5d;
-      letter-spacing: 3px;
-    }
+.analysis {
+  margin-top: 24px;
+  padding: 16px;
+  border: 1px dashed #792020;
+  background: rgba(80,0,0,.10);
+}
 
-    .footer {
-      margin-top: 24px;
-      text-align: right;
-      color: #4f5754;
-      font-size: 10px;
-      letter-spacing: 2px;
-    }
-  </style>
+.row {
+  margin: 8px 0;
+  font-size: 12px;
+  color: #b98686;
+}
+
+.value {
+  color: #f0dddd;
+}
+
+.redacted {
+  background: #a52727;
+  color: #a52727;
+  padding: 1px 18px;
+  user-select: none;
+}
+
+.action {
+  margin-top: 26px;
+  text-align: center;
+  color: #e45050;
+  font-weight: bold;
+  letter-spacing: 3px;
+  font-size: 12px;
+}
+
+.footer {
+  margin-top: 20px;
+  color: #633737;
+  text-align: right;
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
+@keyframes flash {
+  0%, 45% { opacity: 1; }
+  50%, 70% { opacity: .55; }
+  75%, 100% { opacity: 1; }
+}
+
+@keyframes alarm {
+  0%, 100% {
+    box-shadow: inset 0 0 80px rgba(255,0,0,.12);
+  }
+  50% {
+    box-shadow: inset 0 0 130px rgba(255,0,0,.27);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .warning, body::after {
+    animation: none;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <div class="panel">
+<div class="panel">
 
-    <div class="status">ARTIFACT RECOVERED</div>
+  <div class="warning">
+    ⚠ CRITICAL SECURITY EVENT ⚠
+  </div>
 
-    <h1>FORENSIC ANALYSIS REQUIRED</h1>
+  <div class="content">
 
-    <div class="sub">
-      INCIDENT ID: SOTF-002 // SOURCE: UNKNOWN
+    <div class="status">
+      ● ARTIFACT RECOVERED // SYSTEM COMPROMISED
     </div>
 
-    <div class="line"></div>
+    <h1>FORENSIC<br>ANALYSIS<br>REQUIRED</h1>
 
-    <div class="label">RECOVERED HEX ARTIFACT</div>
+    <div class="sub">
+      INCIDENT ID: SOTF-002<br>
+      SEVERITY: CRITICAL<br>
+      SOURCE: UNKNOWN
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="label">
+      RECOVERED HEX ARTIFACT
+    </div>
 
     <div class="data">
       4B4559205245515549524544202F2F2045564944454E43452047524F5753205748455245204E4F5448494E472053484F554C44
     </div>
 
-    <div class="label">ENCRYPTED PAYLOAD</div>
+    <div class="label">
+      ENCRYPTED PAYLOAD
+    </div>
 
     <div class="data">
       OPV JMNL SOQCR PNDE V PRTL VV TCQJ
     </div>
 
-    <div class="cipher-box">
+    <div class="analysis">
+
       <div class="row">
-        CIPHER:
+        ENCRYPTION:
         <span class="value">VIGENERE</span>
       </div>
 
       <div class="row">
-        KEY:
-        <span class="redacted">[REDACTED]</span>
+        DECRYPTION KEY:
+        <span class="redacted">REDACTED</span>
       </div>
+
+      <div class="row">
+        INTEGRITY:
+        <span class="value">UNKNOWN</span>
+      </div>
+
+    </div>
+
+    <div class="action">
+      ⚠ CORRELATE PHYSICAL EVIDENCE ⚠
     </div>
 
     <div class="footer">
-      CORRELATE PHYSICAL EVIDENCE
+      SURVIVAL SYSTEM // INCIDENT RESPONSE
     </div>
 
   </div>
+</div>
 
 </body>
 </html>
