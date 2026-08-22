@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Forensic Analysis</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 50% 30%, #101919 0%, #070b0b 42%, #020303 78%);
+      color: #e2e8e5;
+      font-family: "Courier New", monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.025) 0px,
+          rgba(255,255,255,0.025) 1px,
+          transparent 1px,
+          transparent 5px
+        );
+      pointer-events: none;
+    }
+
+    .panel {
+      width: 100%;
+      max-width: 720px;
+      padding: 28px 24px;
+      background: rgba(0,0,0,.58);
+      border: 1px solid rgba(100,150,140,.35);
+      box-shadow:
+        0 0 34px rgba(80,140,125,.08),
+        inset 0 0 26px rgba(80,140,125,.04);
+    }
+
+    .status {
+      color: #76a99a;
+      font-size: 12px;
+      letter-spacing: 3px;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 7vw, 50px);
+      letter-spacing: 4px;
+    }
+
+    .sub {
+      margin-top: 8px;
+      color: #777;
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+
+    .line {
+      border-top: 1px solid #242424;
+      margin: 24px 0;
+    }
+
+    .label {
+      color: #707a77;
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .data {
+      background: #040606;
+      border: 1px solid #222a28;
+      padding: 16px;
+      color: #cad5d1;
+      line-height: 1.65;
+      word-break: break-all;
+      font-size: 13px;
+      margin-bottom: 22px;
+      user-select: all;
+    }
+
+    .cipher-box {
+      border: 1px solid #27302e;
+      padding: 18px;
+      background: rgba(5,8,8,.7);
+    }
+
+    .row {
+      margin: 7px 0;
+      color: #89938f;
+      font-size: 12px;
+    }
+
+    .value {
+      color: #d5ddd9;
+    }
+
+    .redacted {
+      color: #8d5d5d;
+      letter-spacing: 3px;
+    }
+
+    .footer {
+      margin-top: 24px;
+      text-align: right;
+      color: #4f5754;
+      font-size: 10px;
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="panel">
+
+    <div class="status">ARTIFACT RECOVERED</div>
+
+    <h1>FORENSIC ANALYSIS REQUIRED</h1>
+
+    <div class="sub">
+      INCIDENT ID: SOTF-002 // SOURCE: UNKNOWN
+    </div>
+
+    <div class="line"></div>
+
+    <div class="label">RECOVERED HEX ARTIFACT</div>
+
+    <div class="data">
+      4B4559205245515549524544202F2F2045564944454E43452047524F5753205748455245204E4F5448494E472053484F554C44
+    </div>
+
+    <div class="label">ENCRYPTED PAYLOAD</div>
+
+    <div class="data">
+      OPV JMNL SOQCR PNDE V PRTL VV TCQJ
+    </div>
+
+    <div class="cipher-box">
+      <div class="row">
+        CIPHER:
+        <span class="value">VIGENERE</span>
+      </div>
+
+      <div class="row">
+        KEY:
+        <span class="redacted">[REDACTED]</span>
+      </div>
+    </div>
+
+    <div class="footer">
+      CORRELATE PHYSICAL EVIDENCE
+    </div>
+
+  </div>
+
+</body>
+</html>
