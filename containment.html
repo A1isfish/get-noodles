@@ -30,6 +30,8 @@ body {
   transition: background 1.4s ease;
 }
 
+/* SCANLINES */
+
 body::before {
   content: "";
   position: fixed;
@@ -45,9 +47,9 @@ body::before {
     );
 }
 
-/* -------------------- */
-/* RED CONTAINMENT MODE */
-/* -------------------- */
+/* ========================= */
+/* RED CONTAINMENT CONSOLE   */
+/* ========================= */
 
 .panel {
   width: 100%;
@@ -158,9 +160,9 @@ button:hover {
   letter-spacing: 2px;
 }
 
-/* ---------------- */
-/* CONTAINMENT MODE */
-/* ---------------- */
+/* ========================= */
+/* CONTAINMENT SEQUENCE      */
+/* ========================= */
 
 #sequence {
   display: none;
@@ -213,9 +215,9 @@ button:hover {
   letter-spacing: 2px;
 }
 
-/* -------- */
-/* BLACKOUT */
-/* -------- */
+/* ========================= */
+/* BLACKOUT                  */
+/* ========================= */
 
 #blackout {
   display: none;
@@ -225,9 +227,9 @@ button:hover {
   z-index: 50;
 }
 
-/* ---------------- */
-/* RESTORED / GREEN */
-/* ---------------- */
+/* ========================= */
+/* GREEN RESTORED SYSTEM     */
+/* ========================= */
 
 #restored {
   display: none;
@@ -238,34 +240,59 @@ button:hover {
 
 .restored-panel {
   padding: 42px 24px;
-  border: 1px solid rgba(119,180,161,.38);
-  background: rgba(0,8,7,.74);
+
+  border: 1px solid rgba(91, 220, 100, .48);
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(16, 65, 20, .30) 0%,
+      rgba(2, 18, 4, .90) 70%
+    );
+
   box-shadow:
-    0 0 40px rgba(90,180,150,.12),
-    inset 0 0 35px rgba(90,180,150,.05);
+    0 0 50px rgba(68, 255, 81, .18),
+    inset 0 0 45px rgba(68, 255, 81, .08);
 }
 
 .restored-status {
-  color: #7fae9e;
+  color: #6fc978;
   font-size: 11px;
   letter-spacing: 3px;
 }
 
 .restored-title {
   margin-top: 14px;
-  color: #e2eee9;
+  color: #dffff0;
   font-size: clamp(32px, 9vw, 58px);
   font-weight: bold;
   line-height: 1;
   letter-spacing: 4px;
+
+  text-shadow:
+    0 0 8px rgba(87,255,100,.35),
+    0 0 22px rgba(87,255,100,.18);
 }
 
 .restored-line {
   margin-top: 15px;
-  color: #708c83;
+  color: #69a970;
   font-size: 11px;
   letter-spacing: 3px;
 }
+
+.green-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: #69e275;
+  box-shadow: 0 0 10px rgba(90,255,100,.75);
+  animation: greenPulse 1.8s infinite;
+}
+
+/* MISSION COMPLETE */
 
 .mission {
   margin-top: 40px;
@@ -278,16 +305,19 @@ button:hover {
 }
 
 .mission-title {
-  color: #8fbfaf;
+  color: #8de797;
   font-size: clamp(25px, 7vw, 42px);
   font-weight: bold;
   letter-spacing: 4px;
+
+  text-shadow:
+    0 0 12px rgba(80,255,90,.25);
 }
 
 .anniversary {
   margin-top: 28px;
   font-family: Georgia, serif;
-  color: #f1ebe7;
+  color: #f3eee9;
   font-size: clamp(27px, 7vw, 42px);
   line-height: 1.4;
 }
@@ -295,14 +325,22 @@ button:hover {
 .heart {
   display: block;
   margin-top: 8px;
-  color: #b86565;
+  color: #bd6262;
 }
+
+/* FINAL CACHE */
 
 .cache {
   margin-top: 38px;
   padding: 18px;
-  border: 1px dashed #54776c;
-  background: rgba(55,100,85,.07);
+
+  border: 1px dashed #55a85d;
+
+  background: rgba(55,150,65,.08);
+
+  box-shadow:
+    inset 0 0 20px rgba(70,220,80,.04);
+
   opacity: 0;
   transition: opacity 1.6s ease;
 }
@@ -312,7 +350,7 @@ button:hover {
 }
 
 .cache-label {
-  color: #82ad9f;
+  color: #81dc89;
   font-size: 11px;
   font-weight: bold;
   letter-spacing: 3px;
@@ -320,27 +358,59 @@ button:hover {
 
 .cache-sub {
   margin-top: 10px;
-  color: #627a72;
+  color: #638e68;
   font-size: 10px;
   letter-spacing: 2px;
 }
 
-/* ---------- */
-/* ANIMATIONS */
-/* ---------- */
+/* ========================= */
+/* ANIMATIONS                */
+/* ========================= */
 
 @keyframes flash {
-  0%, 42%, 100% { opacity: 1; }
-  50%, 68% { opacity: .45; }
+  0%, 42%, 100% {
+    opacity: 1;
+  }
+
+  50%, 68% {
+    opacity: .45;
+  }
 }
 
 @keyframes shake {
-  0% { transform: translate(0); }
-  20% { transform: translate(-4px, 2px); }
-  40% { transform: translate(4px, -2px); }
-  60% { transform: translate(-2px, -1px); }
-  80% { transform: translate(3px, 1px); }
-  100% { transform: translate(0); }
+  0% {
+    transform: translate(0);
+  }
+
+  20% {
+    transform: translate(-4px, 2px);
+  }
+
+  40% {
+    transform: translate(4px, -2px);
+  }
+
+  60% {
+    transform: translate(-2px, -1px);
+  }
+
+  80% {
+    transform: translate(3px, 1px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes greenPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .35;
+  }
 }
 
 .shake {
@@ -349,7 +419,8 @@ button:hover {
 
 @media (prefers-reduced-motion: reduce) {
   .warning,
-  .shake {
+  .shake,
+  .green-dot {
     animation: none;
   }
 
@@ -364,7 +435,9 @@ button:hover {
 
 <body>
 
-<!-- RED CONSOLE -->
+<!-- ========================= -->
+<!-- RED CONSOLE               -->
+<!-- ========================= -->
 
 <div class="panel" id="console">
 
@@ -417,7 +490,10 @@ button:hover {
 
 </div>
 
-<!-- RED PROGRESS SEQUENCE -->
+
+<!-- ========================= -->
+<!-- RED PROGRESS SEQUENCE     -->
+<!-- ========================= -->
 
 <div id="sequence">
 
@@ -443,22 +519,30 @@ button:hover {
 
 </div>
 
-<!-- BLACKOUT -->
+
+<!-- ========================= -->
+<!-- BLACKOUT                  -->
+<!-- ========================= -->
 
 <div id="blackout"></div>
 
-<!-- GREEN RESTORED SCREEN -->
+
+<!-- ========================= -->
+<!-- GREEN RESTORED SCREEN     -->
+<!-- ========================= -->
 
 <div id="restored">
 
   <div class="restored-panel">
 
     <div class="restored-status">
+      <span class="green-dot"></span>
       SURVIVAL SYSTEM // ONLINE
     </div>
 
     <div class="restored-title">
-      SYSTEM<br>RESTORED
+      SYSTEM<br>
+      RESTORED
     </div>
 
     <div class="restored-line">
@@ -494,56 +578,118 @@ button:hover {
 
 </div>
 
+
 <script>
 
 const correctToken = "IR04-7F3A9C";
 
-const tokenInput = document.getElementById("token");
-const response = document.getElementById("response");
-const containButton = document.getElementById("containButton");
+const tokenInput =
+  document.getElementById("token");
 
-containButton.addEventListener("click", containThreat);
+const response =
+  document.getElementById("response");
 
-tokenInput.addEventListener("keydown", function(event) {
-  if (event.key === "Enter") {
-    containThreat();
+const containButton =
+  document.getElementById("containButton");
+
+
+containButton.addEventListener(
+  "click",
+  containThreat
+);
+
+
+tokenInput.addEventListener(
+  "keydown",
+  function(event) {
+
+    if (event.key === "Enter") {
+      containThreat();
+    }
+
   }
-});
+);
+
 
 function containThreat() {
 
-  const input = tokenInput.value.trim().toUpperCase();
+  const input =
+    tokenInput.value
+    .trim()
+    .toUpperCase();
+
 
   if (input !== correctToken) {
 
     response.innerHTML =
       "ACCESS DENIED<br>INVALID INCIDENT TOKEN";
 
-    document.getElementById("console").classList.add("shake");
+    document
+      .getElementById("console")
+      .classList
+      .add("shake");
+
 
     setTimeout(() => {
-      document.getElementById("console").classList.remove("shake");
+
+      document
+        .getElementById("console")
+        .classList
+        .remove("shake");
+
     }, 1200);
+
 
     return;
   }
 
+
   response.innerHTML = "";
 
-  document.getElementById("console").style.display = "none";
-  document.getElementById("sequence").style.display = "block";
+
+  document
+    .getElementById("console")
+    .style
+    .display = "none";
+
+
+  document
+    .getElementById("sequence")
+    .style
+    .display = "block";
+
 
   runContainmentSequence();
 }
 
-function setProgress(percent, title, subtitle) {
 
-  document.getElementById("progressBar").style.width = percent + "%";
-  document.getElementById("progressText").innerText = percent + "%";
+function setProgress(
+  percent,
+  title,
+  subtitle
+) {
 
-  document.getElementById("sequenceTitle").innerText = title;
-  document.getElementById("sequenceSub").innerText = subtitle;
+  document
+    .getElementById("progressBar")
+    .style
+    .width = percent + "%";
+
+
+  document
+    .getElementById("progressText")
+    .innerText = percent + "%";
+
+
+  document
+    .getElementById("sequenceTitle")
+    .innerText = title;
+
+
+  document
+    .getElementById("sequenceSub")
+    .innerText = subtitle;
 }
+
 
 function runContainmentSequence() {
 
@@ -553,82 +699,137 @@ function runContainmentSequence() {
     "AUTHORIZATION VERIFIED"
   );
 
+
   setTimeout(() => {
+
     setProgress(
       24,
       "ISOLATING THREAT",
       "SEVERING ACTIVE CONNECTIONS"
     );
+
   }, 1000);
 
+
   setTimeout(() => {
+
     setProgress(
       47,
       "CONTAINMENT ACTIVE",
       "QUARANTINING COMPROMISED SYSTEMS"
     );
+
   }, 2100);
 
+
   setTimeout(() => {
+
     setProgress(
       71,
       "PURGING THREAT",
       "REMOVING MALICIOUS ARTIFACTS"
     );
+
   }, 3300);
 
+
   setTimeout(() => {
+
     setProgress(
       93,
       "RESTORING SYSTEM",
       "VERIFYING SYSTEM INTEGRITY"
     );
+
   }, 4500);
 
+
   setTimeout(() => {
+
     setProgress(
       100,
       "THREAT NEUTRALIZED",
       "CONTAINMENT SUCCESSFUL"
     );
 
-    document.getElementById("sequenceBox").classList.add("shake");
+
+    document
+      .getElementById("sequenceBox")
+      .classList
+      .add("shake");
+
   }, 5700);
+
+
+  /* BLACKOUT */
 
   setTimeout(() => {
 
-    document.getElementById("blackout").style.display = "block";
+    document
+      .getElementById("blackout")
+      .style
+      .display = "block";
 
   }, 6900);
 
+
+  /* CHANGE SYSTEM TO GREEN */
+
   setTimeout(() => {
 
-    document.getElementById("sequence").style.display = "none";
+    document
+      .getElementById("sequence")
+      .style
+      .display = "none";
+
 
     document.body.style.background =
-      "radial-gradient(circle at 50% 35%, #17312b 0%, #081412 40%, #010303 80%)";
+      "radial-gradient(circle at 50% 35%, #163d18 0%, #071708 42%, #010401 82%)";
 
-    document.getElementById("restored").style.display = "block";
+
+    document
+      .getElementById("restored")
+      .style
+      .display = "block";
 
   }, 7900);
 
+
+  /* REMOVE BLACKOUT */
+
   setTimeout(() => {
 
-    document.getElementById("blackout").style.display = "none";
+    document
+      .getElementById("blackout")
+      .style
+      .display = "none";
 
   }, 8500);
 
+
+  /* MISSION COMPLETE */
+
   setTimeout(() => {
 
-    document.getElementById("mission").classList.add("show");
+    document
+      .getElementById("mission")
+      .classList
+      .add("show");
 
   }, 9800);
 
+
+  /* FINAL CACHE */
+
   setTimeout(() => {
 
-    document.getElementById("cache").classList.add("show");
+    document
+      .getElementById("cache")
+      .classList
+      .add("show");
 
   }, 12000);
+
 }
 
 </script>
