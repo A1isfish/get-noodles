@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Containment Console</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 22px;
+
+  background:
+    radial-gradient(circle at center, #200505 0%, #090202 45%, #010101 100%);
+
+  color: #e7e7e7;
+  font-family: "Courier New", monospace;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,.025) 0,
+      rgba(255,255,255,.025) 1px,
+      transparent 1px,
+      transparent 5px
+    );
+
+  pointer-events: none;
+}
+
+.panel {
+  width: 100%;
+  max-width: 680px;
+
+  background: rgba(4,0,0,.9);
+
+  border: 1px solid #741d1d;
+
+  box-shadow:
+    0 0 40px rgba(200,0,0,.15),
+    inset 0 0 40px rgba(120,0,0,.06);
+}
+
+.warning {
+  background: #8c1717;
+
+  padding: 10px;
+
+  text-align: center;
+
+  font-size: 11px;
+  font-weight: bold;
+
+  letter-spacing: 4px;
+
+  animation: flash 1.4s infinite;
+}
+
+.content {
+  padding: 28px 24px;
+}
+
+.status {
+  color: #b64c4c;
+
+  font-size: 11px;
+
+  letter-spacing: 3px;
+}
+
+h1 {
+  margin: 12px 0 5px;
+
+  font-size: clamp(31px, 8vw, 54px);
+
+  line-height: .95;
+
+  letter-spacing: 3px;
+}
+
+.meta {
+  color: #875555;
+
+  font-size: 11px;
+
+  line-height: 1.8;
+
+  letter-spacing: 2px;
+
+  margin-top: 16px;
+}
+
+.line {
+  border-top: 1px solid #461515;
+
+  margin: 25px 0;
+}
+
+.label {
+  color: #b65858;
+
+  font-size: 10px;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 10px;
+}
+
+input {
+  width: 100%;
+
+  background: #050101;
+
+  border: 1px solid #762323;
+
+  color: #eee;
+
+  padding: 16px;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 18px;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+
+  outline: none;
+}
+
+input:focus {
+  border-color: #c34040;
+
+  box-shadow: 0 0 15px rgba(200,40,40,.18);
+}
+
+button {
+  width: 100%;
+
+  margin-top: 14px;
+
+  padding: 15px;
+
+  background: #7d1717;
+
+  border: 1px solid #b33737;
+
+  color: white;
+
+  font-family: "Courier New", monospace;
+
+  font-weight: bold;
+
+  letter-spacing: 3px;
+
+  cursor: pointer;
+}
+
+button:hover {
+  background: #a32020;
+}
+
+#response {
+  margin-top: 20px;
+
+  min-height: 22px;
+
+  color: #bd4c4c;
+
+  font-size: 12px;
+
+  letter-spacing: 2px;
+
+  line-height: 1.8;
+}
+
+.footer {
+  margin-top: 26px;
+
+  text-align: right;
+
+  color: #562727;
+
+  font-size: 9px;
+
+  letter-spacing: 2px;
+}
+
+
+/* SUCCESS SCREEN */
+
+#success {
+  display: none;
+
+  width: 100%;
+  max-width: 680px;
+
+  text-align: center;
+
+  padding: 45px 25px;
+}
+
+.success-title {
+  color: #87b8a8;
+
+  font-size: clamp(28px, 8vw, 52px);
+
+  font-weight: bold;
+
+  letter-spacing: 4px;
+}
+
+.success-line {
+  margin: 18px 0;
+
+  color: #698d82;
+
+  font-size: 12px;
+
+  letter-spacing: 3px;
+}
+
+.anniversary {
+  display: none;
+
+  margin-top: 55px;
+
+  font-family: Georgia, serif;
+
+  color: #f0e9e4;
+
+  font-size: clamp(26px, 7vw, 42px);
+
+  line-height: 1.5;
+
+  animation: fade 2s forwards;
+}
+
+.heart {
+  color: #a95a5a;
+}
+
+@keyframes flash {
+  0%, 45%, 100% { opacity: 1; }
+  50%, 70% { opacity: .5; }
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .warning {
+    animation: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+
+<div class="panel" id="console">
+
+  <div class="warning">
+    ⚠ ACTIVE THREAT // CONTAINMENT REQUIRED ⚠
+  </div>
+
+  <div class="content">
+
+    <div class="status">
+      INCIDENT RESPONSE // SOTF-004
+    </div>
+
+    <h1>
+      CONTAINMENT<br>
+      CONSOLE
+    </h1>
+
+    <div class="meta">
+      THREAT STATUS: ACTIVE<br>
+      AUTHORIZATION: REQUIRED<br>
+      INCIDENT TOKEN: MISSING
+    </div>
+
+    <div class="line"></div>
+
+    <div class="label">
+      ENTER RECOVERED INCIDENT TOKEN
+    </div>
+
+    <input
+      type="text"
+      id="token"
+      placeholder="IR04-XXXXXX"
+      autocomplete="off"
+      spellcheck="false"
+    >
+
+    <button onclick="containThreat()">
+      AUTHORIZE CONTAINMENT
+    </button>
+
+    <div id="response"></div>
+
+    <div class="footer">
+      SURVIVAL SYSTEM // INCIDENT RESPONSE
+    </div>
+
+  </div>
+
+</div>
+
+
+<div id="success">
+
+  <div class="success-title" id="successTitle">
+    VALIDATING TOKEN...
+  </div>
+
+  <div class="success-line" id="successLine">
+    PLEASE WAIT
+  </div>
+
+  <div class="anniversary" id="anniversary">
+    Happy anniversary.<br>
+    <span class="heart">♥</span>
+  </div>
+
+</div>
+
+
+<script>
+
+const correctToken = "IR04-7F3A9C";
+
+function containThreat() {
+
+  const input =
+    document.getElementById("token")
+    .value
+    .trim()
+    .toUpperCase();
+
+  const response =
+    document.getElementById("response");
+
+  if (input !== correctToken) {
+
+    response.innerHTML =
+      "ACCESS DENIED<br>INVALID INCIDENT TOKEN";
+
+    return;
+  }
+
+  document.getElementById("console").style.display = "none";
+
+  const success =
+    document.getElementById("success");
+
+  success.style.display = "block";
+
+
+  setTimeout(() => {
+
+    document.getElementById("successTitle").innerText =
+      "TOKEN ACCEPTED";
+
+    document.getElementById("successLine").innerText =
+      "AUTHORIZATION VERIFIED";
+
+  }, 1200);
+
+
+  setTimeout(() => {
+
+    document.getElementById("successTitle").innerText =
+      "INITIATING CONTAINMENT";
+
+    document.getElementById("successLine").innerText =
+      "ISOLATING ACTIVE THREAT...";
+
+  }, 2700);
+
+
+  setTimeout(() => {
+
+    document.getElementById("successTitle").innerText =
+      "THREAT NEUTRALIZED";
+
+    document.getElementById("successLine").innerText =
+      "SYSTEM INTEGRITY RESTORED";
+
+  }, 4500);
+
+
+  setTimeout(() => {
+
+    document.getElementById("successTitle").innerText =
+      "SYSTEM RESTORED";
+
+    document.getElementById("successLine").innerText =
+      "INCIDENT SOTF-004 // CLOSED";
+
+  }, 6200);
+
+
+  setTimeout(() => {
+
+    document.getElementById("anniversary").style.display =
+      "block";
+
+  }, 8000);
+
+}
+
+
+document
+  .getElementById("token")
+  .addEventListener("keydown", function(event) {
+
+    if (event.key === "Enter") {
+      containThreat();
+    }
+
+  });
+
+</script>
+
+
+</body>
+</html>
