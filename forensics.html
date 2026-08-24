@@ -57,7 +57,6 @@ body::before {
     inset 0 0 35px rgba(255,0,0,.07);
 }
 
-/* TOP WARNING STRIP */
 .warning {
   background: #8e1818;
   color: white;
@@ -129,7 +128,7 @@ h1 {
 }
 
 .row {
-  margin: 8px 0;
+  margin: 10px 0;
   font-size: 12px;
   color: #b98686;
 }
@@ -138,11 +137,67 @@ h1 {
   color: #f0dddd;
 }
 
-.redacted {
+.key-input {
+  width: 170px;
+  max-width: 100%;
   background: #a52727;
-  color: #a52727;
-  padding: 1px 18px;
-  user-select: none;
+  border: 1px solid #d84b4b;
+  color: white;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  padding: 7px 9px;
+  outline: none;
+  text-transform: uppercase;
+}
+
+.key-input::placeholder {
+  color: rgba(255,255,255,.45);
+}
+
+.key-input:focus {
+  box-shadow: 0 0 10px rgba(255,0,0,.35);
+}
+
+.decrypt-btn {
+  margin-top: 14px;
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #a52a2a;
+  background: #671313;
+  color: #f4dddd;
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.decrypt-btn:active {
+  transform: translateY(1px);
+}
+
+.result {
+  display: none;
+  margin-top: 18px;
+  padding: 15px;
+  border-left: 3px solid #bc3535;
+  background: #090101;
+  color: #f1dddd;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.result.show {
+  display: block;
+}
+
+.result.success {
+  border-color: #bb3e3e;
+}
+
+.result.fail {
+  border-color: #7b1c1c;
+  color: #c65c5c;
 }
 
 .action {
@@ -234,12 +289,29 @@ h1 {
 
       <div class="row">
         DECRYPTION KEY:
-        <span class="redacted">REDACTED</span>
       </div>
 
-      <div class="row">
+      <input
+        id="keyInput"
+        class="key-input"
+        type="text"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="ENTER KEY"
+      >
+
+      <button
+        class="decrypt-btn"
+        onclick="decryptPayload()"
+      >
+        DECRYPT PAYLOAD
+      </button>
+
+      <div id="result" class="result"></div>
+
+      <div class="row" style="margin-top:16px;">
         INTEGRITY:
-        <span class="value">UNKNOWN</span>
+        <span id="integrity" class="value">UNKNOWN</span>
       </div>
 
     </div>
@@ -254,6 +326,45 @@ h1 {
 
   </div>
 </div>
+
+<script>
+function decryptPayload() {
+  const input = document
+    .getElementById("keyInput")
+    .value
+    .trim()
+    .toUpperCase();
+
+  const result = document.getElementById("result");
+  const integrity = document.getElementById("integrity");
+
+  if (input === "VIRGINIA") {
+    result.className = "result show success";
+    result.innerHTML =
+      "&gt; DECRYPTION KEY ACCEPTED.<br>" +
+      "&gt; PAYLOAD RECOVERED.<br><br>" +
+      "<strong>THE DEAD STILL HAVE A HAND IN THIS</strong>";
+
+    integrity.textContent = "VERIFIED";
+  } else {
+    result.className = "result show fail";
+    result.innerHTML =
+      "&gt; DECRYPTION FAILED.<br>" +
+      "&gt; KEY REJECTED.";
+
+    integrity.textContent = "UNKNOWN";
+  }
+}
+
+/* Allow Enter key to submit */
+document
+  .getElementById("keyInput")
+  .addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      decryptPayload();
+    }
+  });
+</script>
 
 </body>
 </html>
