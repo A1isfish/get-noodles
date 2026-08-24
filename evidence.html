@@ -120,10 +120,15 @@ h1 {
   margin-top: 25px;
   border-left: 3px solid #8b2727;
   padding: 14px;
-  color: #8d6d6d;
+  color: #9a7373;
   background: rgba(100,0,0,.07);
   font-size: 11px;
-  line-height: 1.7;
+  line-height: 1.8;
+}
+
+.prompt strong {
+  color: #c96b6b;
+  letter-spacing: 1px;
 }
 
 .footer {
@@ -144,21 +149,25 @@ h1 {
     transform: translate(0);
     text-shadow: none;
   }
+
   93% {
     transform: translate(-2px, 1px);
     text-shadow: 3px 0 #8c1d1d;
   }
+
   95% {
     transform: translate(2px, -1px);
     text-shadow: -3px 0 #666;
   }
+
   97% {
     transform: translate(-1px, 0);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .warning, .glitch {
+  .warning,
+  .glitch {
     animation: none;
   }
 }
@@ -187,21 +196,35 @@ h1 {
     <div class="line"></div>
 
     <div class="terminal">
-      &gt; mounting artifact... <span class="bad">FAILED</span><br>
-      &gt; parsing biological sample... <span class="bad">ERROR</span><br>
-      &gt; recovering rendered payload... <span class="bad">0 BYTES</span><br>
-      &gt; integrity check... <span class="bad">FAILED</span><br><br>
+      &gt; mounting artifact...
+      <span class="bad">FAILED</span><br>
+
+      &gt; parsing biological sample...
+      <span class="bad">ERROR</span><br>
+
+      &gt; recovering rendered payload...
+      <span class="bad">0 BYTES</span><br>
+
+      &gt; integrity check...
+      <span class="bad">FAILED</span><br><br>
 
       <span class="corrupt">
         0x00 FF ?? 4A ██ 19 ?? NULL ██ FF ?? 00
       </span><br><br>
 
       &gt; presentation layer compromised.<br>
-      &gt; actionable evidence unavailable.
+      &gt; rendered evidence cannot be trusted.<br>
+      &gt; raw artifact integrity unknown.
     </div>
 
     <div class="prompt">
       AUTOMATED RECOVERY FAILED.<br>
+      RENDERED PAYLOAD UNAVAILABLE.<br><br>
+
+      <strong>
+        RAW ARTIFACT MAY REMAIN IN SOURCE.
+      </strong><br>
+
       MANUAL ANALYSIS REQUIRED.
     </div>
 
@@ -213,18 +236,25 @@ h1 {
 
 </div>
 
+
 <!--
+
 RECOVERED_FRAGMENT_01
 
-NOTICE:
+CASE NOTE:
 THE PRESENTATION LAYER IS COMPROMISED.
-ANALYZE THE SOURCE.
+RAW ARTIFACT RECOVERY SUCCESSFUL.
 
 ENCODING CHAIN:
 HEX -> BASE64 -> PLAINTEXT
 
 PAYLOAD:
 566b6c5453554a4d525342545545564456464a565453424a546c4e56526b5a4a51306c46546c51674c7938675630465752557846546b6455534342535256465653564a4652446f674d7a59314c544d354e53424f54513d3d
+
+ANALYST NOTE:
+DECODE RECOVERED ARTIFACT.
+CORRELATE RESULT WITH PHYSICAL EVIDENCE.
+
 -->
 
 </body>
